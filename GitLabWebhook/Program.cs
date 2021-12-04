@@ -19,11 +19,3 @@ app.MapControllers();
 
 
 app.Run();
-/*
-* heroku container:login
-* docker login --username=_ --password=$(heroku auth:token) safonovva
-* docker build -t safonovva/safonovva-gitlab-webhook .
-* docker push safonovva/safonovva-gitlab-webhook
-* heroku container:push web --app safonovva-gitlab-webhook
-* heroku container:release web --app safonovva-gitlab-webhook
-*/
