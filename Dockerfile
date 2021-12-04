@@ -18,4 +18,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 #ENTRYPOINT ["dotnet", "GitLabWebhook.dll"]
-CMD ASPNETCORE_URLS=http://*:$PORT dotnet ReboBlog.dll
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet GitLabWebhook.dll

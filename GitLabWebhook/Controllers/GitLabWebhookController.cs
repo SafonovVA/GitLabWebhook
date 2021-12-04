@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace GitLabWebhook.Controllers;
 
 [ApiController]
-[Route("[controller]")]
 public class GitLabWebhookController : ControllerBase
 {
     private readonly ILogger<GitLabWebhookController> _logger;
@@ -15,7 +14,7 @@ public class GitLabWebhookController : ControllerBase
         _bot = bot;
     }
     
-    [HttpGet(Name = "GetGitLabWebhook")]
+    [Route("")]
     public void Get()
     {
         _logger.LogInformation("Request is come");
