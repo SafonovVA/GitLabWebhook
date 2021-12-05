@@ -12,9 +12,9 @@ public class TelegramBot : ITelegramBot
         _bot = new TelegramBotClient(token);
         _logger = logger;
     }
-    public void Send()
+    public async Task Send()
     {
         _logger.LogInformation("Send message");
-        _bot.SendTextMessageAsync(-703603408, "SUKA");
+        await _bot.SendTextMessageAsync(-703603408, "SUKA");
     }
 }

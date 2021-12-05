@@ -1,45 +1,8 @@
-using System.Text.Json;
-using GitLabWebhook.Requests.Models;
-using GitLabWebhook.Requests.Requests;
-using Microsoft.AspNetCore.Mvc;
+GET {{host}}
+Content-Type: application/json
+Accept: application/json
 
-namespace GitLabWebhook.Controllers;
-
-[ApiController]
-public class GitLabWebhookController : ControllerBase
 {
-    private readonly ILogger<GitLabWebhookController> _logger;
-    private readonly TelegramBot _bot;
-
-    public GitLabWebhookController(ILogger<GitLabWebhookController> logger, TelegramBot bot)
-    {
-        _logger = logger;
-        _bot = bot;
-    }
-    
-    [HttpGet]
-    [Route("")]
-    public async Task<Push> Get([FromBody] Push gitlabEvent)
-    {
-        _logger.LogInformation("Request is come");
-        await _bot.Send();
-        return (Push)gitlabEvent;
-    }
-    
-    [HttpGet]
-    [Route("/test")]
-    public async Task<IActionResult> Test([FromBody] Repository gitlabEvent)
-    {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-        _logger.LogInformation("Request is come");
-        await _bot.Send();
-        return Ok();
-    }
-    /*
-     * {
   "object_kind": "push",
   "event_name": "push",
   "before": "95790bf891e76fee5e1747ab589903a6a1f80f22",
@@ -110,5 +73,5 @@ public class GitLabWebhookController : ControllerBase
   ],
   "total_commits_count": 4
 }
-     */
-}
+
+###
