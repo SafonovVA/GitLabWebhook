@@ -4,7 +4,7 @@ using GitLabWebhook.Requests.Models;
 
 namespace GitLabWebhook.Requests.Requests;
 
-public class Push// : IEventRequest
+public class Push : IEventRequest
 {
     [Required]
     [JsonPropertyName("object_kind")]

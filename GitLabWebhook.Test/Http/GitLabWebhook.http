@@ -1,6 +1,7 @@
-GET {{host}}
+GET {{host}}/Push
 Content-Type: application/json
 Accept: application/json
+X-Gitlab-Token: 123
 
 {
   "object_kind": "push",

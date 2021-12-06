@@ -19,11 +19,19 @@ public class GitLabWebhookController : ControllerBase
     
     [HttpGet]
     [Route("")]
-    public async Task<Push> Get([FromBody] Push gitlabEvent)
+    public async void Get()
     {
         _logger.LogInformation("Request is come");
         await _bot.Send();
-        return (Push)gitlabEvent;
+    }
+
+    [HttpGet]
+    [Route("Push")]
+    public async Task<Push> Get([FromBody] Push gitlabEvent)
+    {
+      _logger.LogInformation("Request is come");
+      await _bot.Send();
+      return gitlabEvent;
     }
     /*
      * {
