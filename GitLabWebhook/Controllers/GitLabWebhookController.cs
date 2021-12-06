@@ -25,19 +25,6 @@ public class GitLabWebhookController : ControllerBase
         await _bot.Send();
         return (Push)gitlabEvent;
     }
-    
-    [HttpGet]
-    [Route("/test")]
-    public async Task<IActionResult> Test([FromBody] Repository gitlabEvent)
-    {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-        _logger.LogInformation("Request is come");
-        await _bot.Send();
-        return Ok();
-    }
     /*
      * {
   "object_kind": "push",
