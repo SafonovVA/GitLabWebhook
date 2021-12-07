@@ -3,6 +3,7 @@ using System.Text;
 
 namespace GitLabWebhook.Middleware;
 
+[Obsolete]
 public class RequestTypeMiddleware
 {
     private readonly RequestDelegate _next;
