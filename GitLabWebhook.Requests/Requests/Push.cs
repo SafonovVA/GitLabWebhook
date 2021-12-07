@@ -6,11 +6,7 @@ namespace GitLabWebhook.Requests.Requests;
 
 public class Push : EventRequest
 {
-    [Required]
-    [JsonPropertyName("object_kind")]
-    public string ObjectKind { get; set; }
-  
-    [Required]
+  [Required]
     [JsonPropertyName("event_name")]
     public string EventName { get; set; }
     
