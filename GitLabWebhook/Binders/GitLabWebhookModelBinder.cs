@@ -18,7 +18,6 @@ public class GitLabWebhookModelBinder : IModelBinder
 
         var modelKindName = ModelNames.CreatePropertyModelName(bindingContext.ModelName, nameof(EventRequest.ObjectKind));
         var modelTypeValue = bindingContext.ValueProvider.GetValue(modelKindName).FirstValue;
-        
 
         IModelBinder modelBinder;
         ModelMetadata modelMetadata;
