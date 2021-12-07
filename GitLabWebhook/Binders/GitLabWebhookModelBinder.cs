@@ -6,11 +6,11 @@ namespace GitLabWebhook.Binders;
 
 public class GitLabWebhookModelBinder : IModelBinder
 {
-    private Dictionary<Type, (ModelMetadata, IModelBinder)> binders;
+    private readonly Dictionary<Type, (ModelMetadata, IModelBinder)> _binders;
 
     public GitLabWebhookModelBinder(Dictionary<Type, (ModelMetadata, IModelBinder)> binders)
     {
-        this.binders = binders;
+        this._binders = binders;
     }
 
     public async Task BindModelAsync(ModelBindingContext bindingContext)
@@ -31,10 +31,10 @@ public class GitLabWebhookModelBinder : IModelBinder
         switch (modelTypeValue)
         {
             case "push":
-                (modelMetadata, modelBinder) = binders[typeof(Push)];
+                (modelMetadata, modelBinder) = _binders[typeof(Push)];
                 break;
             case "note":
-                (modelMetadata, modelBinder) = binders[typeof(Note)];
+                (modelMetadata, modelBinder) = _binders[typeof(Note)];
                 break;
             default:
                 bindingContext.Result = ModelBindingResult.Failed();
@@ -54,7 +54,7 @@ public class GitLabWebhookModelBinder : IModelBinder
         if (newBindingContext.Result.IsModelSet)
         {
             // Setting the ValidationState ensures properties on derived types are correctly 
-            bindingContext.ValidationState[newBindingContext.Result.Model] = new ValidationStateEntry
+            bindingContext.ValidationState[newBindingContext.Result.Model!] = new ValidationStateEntry
             {
                 Metadata = modelMetadata,
             };

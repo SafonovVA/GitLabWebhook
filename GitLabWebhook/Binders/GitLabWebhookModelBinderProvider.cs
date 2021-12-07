@@ -5,14 +5,12 @@ namespace GitLabWebhook.Binders;
 
 public class GitLabWebhookModelBinderProvider : IModelBinderProvider
 {
-    private readonly Logger<GitLabWebhookModelBinderProvider> _logger;
-
     public IModelBinder GetBinder(ModelBinderProviderContext context)
     {
         
         if (context.Metadata.ModelType != typeof(EventRequest))
         {
-            return null;
+            return null!;
         }
         
         var subclasses = new[] { typeof(Push), typeof(Note), };
