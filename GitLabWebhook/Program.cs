@@ -1,16 +1,18 @@
+using System.Text.Json;
 using GitLabWebhook;
 using GitLabWebhook.Binders;
+using GitLabWebhook.JsonConverter;
 using GitLabWebhook.Middleware;
 
 //https://safonovva-gitlab-webhook.herokuapp.com/
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.Services.AddControllers();
-builder.Services.AddControllers(options =>
-{
-    options.ModelBinderProviders.Insert(0, new GitLabWebhookModelBinderProvider());
-    
-});
+builder.Services.AddControllers().AddNewtonsoftJson();
+// builder.Services.AddControllers(options =>
+// {
+//     options.ModelBinderProviders.Insert(0, new GitLabWebhookModelBinderProvider());
+//     
+// });
 
 
 builder.Services.AddSingleton(bot => new TelegramBot(
