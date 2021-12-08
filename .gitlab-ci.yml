@@ -13,6 +13,7 @@ docker-build:
   script:
   - docker build -t safonovva/safonovva-gitlab-webhook .
   - docker login -u _ -p $HEROKU_TOKEN registry.heroku.com
+  - docker tag safonovva/safonovva-gitlab-webhook registry.heroku.com/safonovva-gitlab-webhook/web
   - docker push registry.heroku.com/safonovva-gitlab-webhook/web
   - apk add --no-cache curl
   - echo "Docker Image ID is $(cat imageid.txt)"
