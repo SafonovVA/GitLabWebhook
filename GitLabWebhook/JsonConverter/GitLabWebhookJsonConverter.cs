@@ -9,16 +9,16 @@ public class GitLabWebhookJsonConverter : JsonCreationConverter<EventRequest>
     {
         if (jObject == null) throw new ArgumentNullException(nameof(jObject));
 
-        if (jObject["object_kind"]?.Value<string>() == "push")
+        return jObject["object_kind"]?.Value<string>() switch
         {
-            return new Push();
-        }
-        if (jObject["object_kind"]?.Value<string>() == "note")
-        {
-            return new Note();
-        }
-        
-
-        return new EventRequest();
+            // Push event
+            "push" => new Push(),
+            
+            // Comment event
+            "note" => new Note(),
+            
+            // Null event
+            _ => new EventRequest()
+        };
     }
 }
