@@ -15,7 +15,7 @@ public class GitLabWebhookController : ControllerBase
         _bot = bot;
     }
     
-    [HttpPost, Route("")]
+    [HttpGet, Route("")]
     public async Task<IActionResult> Get([FromBody] EventRequest eventRequest)
     {
         _logger.LogInformation("Request is come");
