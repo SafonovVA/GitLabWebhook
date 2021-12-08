@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace GitLabWebhook.Requests.Models;
+namespace GitLabWebhook.Models;
 
 public class Author
 {

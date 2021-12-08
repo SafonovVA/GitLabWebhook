@@ -1,8 +1,7 @@
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
-namespace GitLabWebhook.Requests.Models;
+namespace GitLabWebhook.Models;
 
 public class Project
 {
@@ -16,35 +15,35 @@ public class Project
     
     [Required]
     [Url]
-    [JsonPropertyName("web_url")]
+    [JsonProperty("web_url")]
     public string WebUrl { get; set; }
     
     [Url]
-    [JsonPropertyName("avatar_url")]
+    [JsonProperty("avatar_url")]
     public string? AvatarUrl { get; set; }
     
     [Required]
-    [JsonPropertyName("git_ssh_url")]
+    [JsonProperty("git_ssh_url")]
     public string GitSSHUrl { get; set; }
     
     [Required]
     [Url]
-    [JsonPropertyName("git_http_url")]
+    [JsonProperty("git_http_url")]
     public string GitHTTPUrl { get; set; }
     
     [Required]
     public string Namespace { get; set; }
     
     [Required]
-    [JsonPropertyName("visibility_level")]
+    [JsonProperty("visibility_level")]
     public int VisibilityLevel { get; set; }
     
     [Required]
-    [JsonPropertyName("path_with_namespace")]
+    [JsonProperty("path_with_namespace")]
     public string PathWithNamespace { get; set; }
     
     [Required]
-    [JsonPropertyName("default_branch")]
+    [JsonProperty("default_branch")]
     public string DefaultBranch { get; set; }
     
     [Required]
@@ -55,11 +54,11 @@ public class Project
     public string Url { get; set; }
     
     [Required]
-    [JsonPropertyName("ssh_url")]
+    [JsonProperty("ssh_url")]
     public string SSHUrl { get; set; }
     
     [Required]
     [Url]
-    [JsonPropertyName("http_url")]
+    [JsonProperty("http_url")]
     public string HTTPUrl { get; set; }
 }

@@ -1,5 +1,5 @@
 using GitLabWebhook.Models;
-using GitLabWebhook.Requests.Requests;
+using GitLabWebhook.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GitLabWebhook.Controllers;
@@ -22,20 +22,6 @@ public class GitLabWebhookController : ControllerBase
         _logger.LogInformation("Request is come");
         await _bot.Send();
         return Ok(eventRequest);
-    }
-    
-    [HttpPost]
-    [Route("persons")]
-    public List<Person> Add([FromBody]List<Person> people)
-    {
-        return people;
-    }
-    
-    [HttpPost]
-    [Route("person")]
-    public Person Add([FromBody] Person people)
-    {
-        return people;
     }
 }
 

@@ -74,37 +74,3 @@ X-Gitlab-Token: 123
   ],
   "total_commits_count": 4
 }
-
-###
-POST {{host}}/persons
-Content-Type: application/json
-Accept: application/json
-X-Gitlab-Token: 123
-
-[{
-  "Kind": "Person",
- "firstName": "Mike",
- "lastName": "Li"
-}, {
-  "Kind": "Student",
- "firstName": "Stephie",
- "lastName": "Wang",
- "schoolName": "No.15 Middle School"
-}, {
-  "Kind": "Doctor",
- "firstName": "Jacky",
- "lastName": "Chen",
- "hospitalName": "Center Hospital"
-}]
-###
-POST {{host}}/person
-Content-Type: application/json
-Accept: application/json
-X-Gitlab-Token: 123
-
-{
-  "Kind": "Student",
- "firstName": "Stephie",
- "lastName": "Wang",
- "schoolName": "No.15 Middle School"
-}

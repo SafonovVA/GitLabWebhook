@@ -1,13 +1,13 @@
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-using GitLabWebhook.Requests.Models;
+using GitLabWebhook.Models;
+using Newtonsoft.Json;
 
-namespace GitLabWebhook.Requests.Requests;
+namespace GitLabWebhook.Requests;
 
 public class Push : EventRequest
 {
-  [Required]
-    [JsonPropertyName("event_name")]
+    [Required]
+    [JsonProperty("event_name")]
     public string EventName { get; set; }
     
     [Required]
@@ -20,32 +20,32 @@ public class Push : EventRequest
     public string Ref { get; set; }
     
     [Required]
-    [JsonPropertyName("checkout_sha")]
+    [JsonProperty("checkout_sha")]
     public string CheckoutSha { get; set; }
     
     [Required]
-    [JsonPropertyName("user_id")]
+    [JsonProperty("user_id")]
     public int UserId { get; set; }
     
     [Required]
-    [JsonPropertyName("user_name")]
+    [JsonProperty("user_name")]
     public string UserName { get; set; }
     
     [Required]
-    [JsonPropertyName("user_username")]
+    [JsonProperty("user_username")]
     public string UserUserName { get; set; }
     
     [Required]
-    [JsonPropertyName("user_email")]
+    [JsonProperty("user_email")]
     public string UserEmail { get; set; }
     
     [Required]
     [Url]
-    [JsonPropertyName("user_avatar")]
+    [JsonProperty("user_avatar")]
     public string UserAvatar { get; set; }
     
     [Required]
-    [JsonPropertyName("project_id")]
+    [JsonProperty("project_id")]
     public int ProjectId { get; set; }
     
     [Required]

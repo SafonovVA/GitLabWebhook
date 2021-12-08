@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
-namespace GitLabWebhook.Requests.Models;
+namespace GitLabWebhook.Models;
 
 public class User
 {
@@ -16,7 +17,7 @@ public class User
     
     [Required]
     [Url]
-    [JsonPropertyName("avatar_url")]
+    [JsonProperty("avatar_url")]
     public string AvatarUrl { get; set; }
     
     [Required]

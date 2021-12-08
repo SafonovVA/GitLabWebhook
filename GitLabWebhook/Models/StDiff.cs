@@ -1,38 +1,37 @@
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
-namespace GitLabWebhook.Requests.Models;
-
+namespace GitLabWebhook.Models;
 public class StDiff
 {
     [Required]
     public string Diff { get; set; }
     
     [Required]
-    [JsonPropertyName("new_path")]
+    [JsonProperty("new_path")]
     public string NewPath { get; set; }
     
     [Required]
-    [JsonPropertyName("old_path")]
+    [JsonProperty("old_path")]
     public string OldPath { get; set; }
     
     [Required]
-    [JsonPropertyName("a_mode")]
+    [JsonProperty("a_mode")]
     public int AMode { get; set; }
     
     [Required]
-    [JsonPropertyName("b_mode")]
+    [JsonProperty("b_mode")]
     public int BMode { get; set; }
     
     [Required]
-    [JsonPropertyName("new_file")]
+    [JsonProperty("new_file")]
     public bool NewFile { get; set; }
     
     [Required]
-    [JsonPropertyName("renamed_file")]
+    [JsonProperty("renamed_file")]
     public bool RenamedFile { get; set; }
     
     [Required]
-    [JsonPropertyName("deleted_file")]
+    [JsonProperty("deleted_file")]
     public bool DeletedFile { get; set; }
 }

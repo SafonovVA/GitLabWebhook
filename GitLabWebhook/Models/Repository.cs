@@ -1,8 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
-namespace GitLabWebhook.Requests.Models;
-
+namespace GitLabWebhook.Models;
 public class Repository
 {
     public string Name { get; set; }
@@ -14,12 +13,11 @@ public class Repository
     [Url]
     public string Homepage { get; set; }
     
-    [Url]
-    [JsonPropertyName("git_http_url")]
-    public string GitHTTPUrl { get; set; }
+    [JsonProperty("git_http_url")]
+    public string GitHttpUrl { get; set; } = string.Empty;
     
-    [JsonPropertyName("git_SSH_url")]
-    public string GitSSHUrl { get; set; }
+    [JsonProperty("git_SSH_url")]
+    public string GitSshUrl { get; set; } = string.Empty;
     
     public int VisibilityLevel { get; set; }
 }

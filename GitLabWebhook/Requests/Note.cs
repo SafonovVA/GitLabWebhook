@@ -1,26 +1,25 @@
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-using GitLabWebhook.Requests.Models;
+using GitLabWebhook.Models;
+using Newtonsoft.Json;
 
-namespace GitLabWebhook.Requests.Requests;
-
+namespace GitLabWebhook.Requests;
 public class Note : EventRequest
 {
-  [Required]
-    [JsonPropertyName("event_type")]
+    [Required]
+    [JsonProperty("event_type")]
     public string EventType { get; set; }
     
     [Required]
     public User User { get; set; }
     
     [Required]
-    [JsonPropertyName("project_id")]
+    [JsonProperty("project_id")]
     public int ProjectId { get; set; }
     
     [Required]
     public Repository Repository { get; set; }
     
-    [Required]
+    [JsonProperty("object_attributes")]
     public ObjectAttributes ObjectAttributes { get; set; }
     
     [Required]
