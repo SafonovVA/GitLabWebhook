@@ -1,4 +1,3 @@
-using GitLabWebhook.Models;
 using GitLabWebhook.Requests;
 using Microsoft.AspNetCore.Mvc;
 
