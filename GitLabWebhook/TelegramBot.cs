@@ -1,4 +1,5 @@
 using Telegram.Bot;
+using Telegram.Bot.Types.Enums;
 
 namespace GitLabWebhook;
 
@@ -12,9 +13,10 @@ public class TelegramBot : ITelegramBot
         _bot = new TelegramBotClient(token);
         _logger = logger;
     }
-    public async Task Send()
+
+    public async Task Send(int chatId, string message)
     {
         _logger.LogInformation("Send message");
-        await _bot.SendTextMessageAsync(-703603408, "SUKA");
+        await _bot.SendTextMessageAsync(chatId, message, ParseMode.Html);
     }
 }

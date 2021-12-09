@@ -19,7 +19,8 @@ public class GitLabWebhookController : ControllerBase
     public async Task<IActionResult> Get([FromBody] EventRequest eventRequest)
     {
         _logger.LogInformation("Request is come");
-        await _bot.Send();
+        // TODO: make chat ID dynamically, need web page to manage chat -> project
+        await _bot.Send(-703603408, eventRequest.ToString());
         return Ok(eventRequest);
     }
 }

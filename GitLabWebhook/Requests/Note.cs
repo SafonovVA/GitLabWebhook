@@ -24,6 +24,11 @@ public class Note : EventRequest
     
     [Required]
     public Commit? Commit { get; set; }
+
+    public override string ToString()
+    {
+      return $"<b>Note</b> from {User?.Name}: <a href=\"{ObjectAttributes?.Url}\">{ObjectAttributes?.Note}</a>";
+    }
 }
 /*
 {

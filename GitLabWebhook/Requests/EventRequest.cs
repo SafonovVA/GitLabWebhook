@@ -11,7 +11,7 @@ public class EventRequest
     [JsonProperty("object_kind")]
     public string ObjectKind { get; set; } = string.Empty;
 
-    public new string ToString()
+    public override string ToString()
     {
         return base.ToString()!;
     }

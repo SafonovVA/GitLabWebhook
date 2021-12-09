@@ -58,6 +58,14 @@ public class Push : EventRequest
     
     [Required]
     public int TotalCommitsCount { get; set; }
+    
+    public override string ToString()
+    {
+        var message = $"<b>Push</b> from {UserName} with commits:\n"; 
+
+        return Commits.Aggregate(message, (current, commit) => 
+          current + $"<a href=\"{commit.Url}\">{commit.Title}</a>\n");
+    }
 }
 /*
      * {

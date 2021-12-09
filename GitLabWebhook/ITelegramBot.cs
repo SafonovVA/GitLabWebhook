@@ -2,5 +2,5 @@ namespace GitLabWebhook;
 
 public interface ITelegramBot
 { 
-    Task Send();
+    Task Send(int chatId, string message);
 }
