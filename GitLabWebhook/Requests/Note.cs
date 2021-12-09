@@ -7,23 +7,23 @@ public class Note : EventRequest
 {
     [Required]
     [JsonProperty("event_type")]
-    public string EventType { get; set; }
+    public string? EventType { get; set; }
     
     [Required]
-    public User User { get; set; }
+    public User? User { get; set; }
     
     [Required]
     [JsonProperty("project_id")]
     public int ProjectId { get; set; }
     
     [Required]
-    public Repository Repository { get; set; }
+    public Repository? Repository { get; set; }
     
     [JsonProperty("object_attributes")]
-    public ObjectAttributes ObjectAttributes { get; set; }
+    public ObjectAttributes? ObjectAttributes { get; set; }
     
     [Required]
-    public Commit Commit { get; set; }
+    public Commit? Commit { get; set; }
 }
 /*
 {

@@ -5,15 +5,15 @@ namespace GitLabWebhook.Models;
 public class StDiff
 {
     [Required]
-    public string Diff { get; set; }
+    public string? Diff { get; set; }
     
     [Required]
     [JsonProperty("new_path")]
-    public string NewPath { get; set; }
+    public string? NewPath { get; set; }
     
     [Required]
     [JsonProperty("old_path")]
-    public string OldPath { get; set; }
+    public string? OldPath { get; set; }
     
     [Required]
     [JsonProperty("a_mode")]

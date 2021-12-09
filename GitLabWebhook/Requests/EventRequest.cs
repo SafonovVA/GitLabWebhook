@@ -9,5 +9,10 @@ public class EventRequest
 {
     [Required]
     [JsonProperty("object_kind")]
-    public string ObjectKind { get; set; }
+    public string ObjectKind { get; set; } = string.Empty;
+
+    public new string ToString()
+    {
+        return base.ToString()!;
+    }
 }

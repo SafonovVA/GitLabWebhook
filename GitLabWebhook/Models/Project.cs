@@ -16,7 +16,7 @@ public class Project
     [Required]
     [Url]
     [JsonProperty("web_url")]
-    public string WebUrl { get; set; }
+    public string? WebUrl { get; set; }
     
     [Url]
     [JsonProperty("avatar_url")]
@@ -24,15 +24,15 @@ public class Project
     
     [Required]
     [JsonProperty("git_ssh_url")]
-    public string GitSSHUrl { get; set; }
+    public string? GitSshUrl { get; set; }
     
     [Required]
     [Url]
     [JsonProperty("git_http_url")]
-    public string GitHTTPUrl { get; set; }
+    public string? GitHttpUrl { get; set; }
     
     [Required]
-    public string Namespace { get; set; }
+    public string? Namespace { get; set; }
     
     [Required]
     [JsonProperty("visibility_level")]
@@ -40,25 +40,25 @@ public class Project
     
     [Required]
     [JsonProperty("path_with_namespace")]
-    public string PathWithNamespace { get; set; }
+    public string? PathWithNamespace { get; set; }
     
     [Required]
     [JsonProperty("default_branch")]
-    public string DefaultBranch { get; set; }
+    public string? DefaultBranch { get; set; }
     
     [Required]
     [Url]
-    public string Homepage { get; set; }
+    public string? Homepage { get; set; }
     
     [Required]
-    public string Url { get; set; }
+    public string? Url { get; set; }
     
     [Required]
     [JsonProperty("ssh_url")]
-    public string SSHUrl { get; set; }
+    public string? SshUrl { get; set; }
     
     [Required]
     [Url]
     [JsonProperty("http_url")]
-    public string HTTPUrl { get; set; }
+    public string? HttpUrl { get; set; }
 }

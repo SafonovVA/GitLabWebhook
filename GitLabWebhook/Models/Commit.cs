@@ -10,7 +10,7 @@ public class Commit
   [Required]
   public string? Message { get; set; }
   
-  public string Title { get; set; } = string.Empty;
+  public string? Title { get; set; }
   
   [Required]
   public DateTime Timestamp { get; set; }

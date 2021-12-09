@@ -16,19 +16,19 @@ public abstract class JsonCreationConverter<T> : Newtonsoft.Json.JsonConverter
     }
 
 
-    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+    public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
     {
         if (reader == null) throw new ArgumentNullException(nameof(reader));
         if (serializer == null) throw new ArgumentNullException(nameof(serializer));
-        if (reader.TokenType == JsonToken.Null) return null;
+        if (reader.TokenType == JsonToken.Null) return null!;
 
         var jObject = JObject.Load(reader);
         T target = Create(objectType, jObject);
-        serializer.Populate(jObject.CreateReader(), target);
-        return target;
+        serializer.Populate(jObject.CreateReader(), target!);
+        return target!;
     }
 
-    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
     {
         throw new NotImplementedException();
     }
