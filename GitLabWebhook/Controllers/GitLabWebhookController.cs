@@ -1,22 +1,27 @@
+using System.Threading.Tasks;
 using GitLabWebhook.Requests;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace GitLabWebhook.Controllers;
 
 [ApiController]
+[Area("api")]
+[Route("[area]/gitlab")]
 public class GitLabWebhookController : ControllerBase
 {
-    private readonly ILogger<GitLabWebhookController> _logger;
     private readonly TelegramBot _bot;
+    private readonly ILogger<GitLabWebhookController> _logger;
 
     public GitLabWebhookController(ILogger<GitLabWebhookController> logger, TelegramBot bot)
     {
         _logger = logger;
         _bot = bot;
     }
-    
-    [HttpPost, Route("")]
-    public async Task<IActionResult> Get([FromBody] EventRequest eventRequest)
+
+    [HttpPost]
+    [Route("")]
+    public async Task<IActionResult> Handle([FromBody] EventRequest eventRequest)
     {
         _logger.LogInformation("Request is come");
         // TODO: make chat ID dynamically, need web page to manage chat -> project
@@ -24,12 +29,3 @@ public class GitLabWebhookController : ControllerBase
         return Ok(eventRequest);
     }
 }
-
-
-
-
-
-
-
-
-

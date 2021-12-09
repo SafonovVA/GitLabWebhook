@@ -1,10 +1,18 @@
 using GitLabWebhook;
+using GitLabWebhook.Data;
 using GitLabWebhook.Middleware;
-
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 //https://safonovva-gitlab-webhook.herokuapp.com/
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers().AddNewtonsoftJson();
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddControllersWithViews().AddNewtonsoftJson();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddSingleton(bot => new TelegramBot(
     builder.Configuration.GetConnectionString("TelegramBotToken"),
@@ -17,10 +25,45 @@ builder.WebHost.UseSentry(o =>
     o.TracesSampleRate = 1.0;
 });
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
 
-app.UseMiddleware<CheckTokenMiddleware>(builder.Configuration.GetConnectionString("GitlabToken"));
+app.MapWhen(
+    context => context.Request.Path.StartsWithSegments("/api/gitlab/"), 
+    appBuilder => appBuilder.UseMiddleware<CheckTokenMiddleware>(builder.Configuration.GetConnectionString("GitlabToken")));
 
-app.MapControllers();
+if (app.Environment.IsDevelopment())
+{
+    app.UseMigrationsEndPoint();
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+else
+{
+    app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapControllerRoute(
+    "default",
+    "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    "gitlab",
+    "api/gitlab",
+    new { controller = "GitLabWebhookController", action = "Handle" });
+
+app.MapRazorPages();
 
 app.Run();

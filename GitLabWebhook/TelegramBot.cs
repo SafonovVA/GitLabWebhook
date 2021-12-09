@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
 
@@ -5,8 +7,8 @@ namespace GitLabWebhook;
 
 public class TelegramBot : ITelegramBot
 {
-    private readonly ILogger<TelegramBot> _logger;
     private readonly TelegramBotClient _bot;
+    private readonly ILogger<TelegramBot> _logger;
 
     public TelegramBot(string token, ILogger<TelegramBot> logger)
     {

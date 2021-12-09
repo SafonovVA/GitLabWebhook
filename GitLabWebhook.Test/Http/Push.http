@@ -47,13 +47,11 @@ X-Gitlab-Token: 123
         "email": "safonov.open@gmail.com"
       },
       "added": [
-
       ],
       "modified": [
         ".gitignore"
       ],
       "removed": [
-
       ]
     }
   ],

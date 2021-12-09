@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace GitLabWebhook.Requests;
 
-[JsonConverter(typeof(GitLabWebhookJsonConverter))] 
+[JsonConverter(typeof(GitLabWebhookJsonConverter))]
 public class EventRequest
 {
     [Required]

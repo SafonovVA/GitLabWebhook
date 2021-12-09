@@ -1,3 +1,4 @@
+using System;
 using GitLabWebhook.Requests;
 using Newtonsoft.Json.Linq;
 
@@ -13,10 +14,10 @@ public class GitLabWebhookJsonConverter : JsonCreationConverter<EventRequest>
         {
             // Push event
             "push" => new Push(),
-            
+
             // Comment event
             "note" => new Note(),
-            
+
             // Null event
             _ => new EventRequest()
         };

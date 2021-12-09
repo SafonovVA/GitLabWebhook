@@ -9,64 +9,64 @@ public class Push : EventRequest
     [Required]
     [JsonProperty("event_name")]
     public string? EventName { get; set; }
-    
+
     [Required]
     public string? Before { get; set; }
-    
+
     [Required]
     public string? After { get; set; }
-    
+
     [Required]
     public string? Ref { get; set; }
-    
+
     [Required]
     [JsonProperty("checkout_sha")]
     public string? CheckoutSha { get; set; }
-    
+
     [Required]
     [JsonProperty("user_id")]
     public int UserId { get; set; }
-    
+
     [Required]
     [JsonProperty("user_name")]
     public string? UserName { get; set; }
-    
+
     [Required]
     [JsonProperty("user_username")]
     public string? UserUserName { get; set; }
-    
+
     [Required]
     [JsonProperty("user_email")]
     public string? UserEmail { get; set; }
-    
+
     [Required]
     [Url]
     [JsonProperty("user_avatar")]
     public string? UserAvatar { get; set; }
-    
+
     [Required]
     [JsonProperty("project_id")]
     public int ProjectId { get; set; }
-    
+
     [Required]
     public Project? Project { get; set; }
-    
+
     [Required]
     public Repository? Repository { get; set; }
 
-    [Required] 
+    [Required]
     public Commit[] Commits { get; set; } = Array.Empty<Commit>();
-    
+
     [Required]
     public int TotalCommitsCount { get; set; }
-    
+
     public override string ToString()
     {
         var message = $"<b>Push</b> from <u>{UserName}</u> with commits:\n";
 
         var i = 1;
-        return Commits.Aggregate(message, (current, commit) => 
-          current + $"{i++}) <a href=\"{commit.Url}\">{commit.Title}</a>\n");
+        return Commits.Aggregate(message, (current, commit) =>
+            current + $"{i++}) <a href=\"{commit.Url}\">{commit.Title}</a>\n");
     }
 }
 /*

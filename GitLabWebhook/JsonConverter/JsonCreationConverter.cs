@@ -1,4 +1,3 @@
-
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -23,7 +22,7 @@ public abstract class JsonCreationConverter<T> : Newtonsoft.Json.JsonConverter
         if (reader.TokenType == JsonToken.Null) return null!;
 
         var jObject = JObject.Load(reader);
-        T target = Create(objectType, jObject);
+        var target = Create(objectType, jObject);
         serializer.Populate(jObject.CreateReader(), target!);
         return target!;
     }

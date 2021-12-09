@@ -3,31 +3,29 @@ using GitLabWebhook.Models;
 using Newtonsoft.Json;
 
 namespace GitLabWebhook.Requests;
+
 public class Note : EventRequest
 {
     [Required]
     [JsonProperty("event_type")]
     public string? EventType { get; set; }
-    
-    [Required]
-    public User? User { get; set; }
-    
+
+    [Required] public User? User { get; set; }
+
     [Required]
     [JsonProperty("project_id")]
     public int ProjectId { get; set; }
-    
-    [Required]
-    public Repository? Repository { get; set; }
-    
-    [JsonProperty("object_attributes")]
-    public ObjectAttributes? ObjectAttributes { get; set; }
-    
-    [Required]
-    public Commit? Commit { get; set; }
+
+    [Required] public Repository? Repository { get; set; }
+
+    [JsonProperty("object_attributes")] public ObjectAttributes? ObjectAttributes { get; set; }
+
+    [Required] public Commit? Commit { get; set; }
 
     public override string ToString()
     {
-      return $"<b>Note</b> from <u>{User?.Name}</u>: <a href=\"{ObjectAttributes?.Url}\">{ObjectAttributes?.Note}</a>";
+        return
+            $"<b>Note</b> from <u>{User?.Name}</u>: <a href=\"{ObjectAttributes?.Url}\">{ObjectAttributes?.Note}</a>";
     }
 }
 /*
