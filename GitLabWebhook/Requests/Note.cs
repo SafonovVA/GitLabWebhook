@@ -27,7 +27,7 @@ public class Note : EventRequest
 
     public override string ToString()
     {
-      return $"<b>Note</b> from {User?.Name}: <a href=\"{ObjectAttributes?.Url}\">{ObjectAttributes?.Note}</a>";
+      return $"<b>Note</b> from <u>{User?.Name}</u>: <a href=\"{ObjectAttributes?.Url}\">{ObjectAttributes?.Note}</a>";
     }
 }
 /*

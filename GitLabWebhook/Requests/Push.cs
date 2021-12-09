@@ -62,7 +62,7 @@ public class Push : EventRequest
     
     public override string ToString()
     {
-        var message = $"<b>Push</b> from {UserName} with commits:\n";
+        var message = $"<b>Push</b> from <u>{UserName}</u> with commits:\n";
 
         var i = 1;
         return Commits.Aggregate(message, (current, commit) => 

@@ -17,6 +17,6 @@ public class TelegramBot : ITelegramBot
     public async Task Send(int chatId, string message)
     {
         _logger.LogInformation("Send message");
-        await _bot.SendTextMessageAsync(chatId, message, ParseMode.Html);
+        await _bot.SendTextMessageAsync(chatId, message, ParseMode.Html, disableWebPagePreview: true);
     }
 }
