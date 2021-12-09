@@ -54,17 +54,19 @@ public class Push : EventRequest
     [Required]
     public Repository? Repository { get; set; }
 
-    [Required] public Commit[] Commits { get; set; } = Array.Empty<Commit>();
+    [Required] 
+    public Commit[] Commits { get; set; } = Array.Empty<Commit>();
     
     [Required]
     public int TotalCommitsCount { get; set; }
     
     public override string ToString()
     {
-        var message = $"<b>Push</b> from {UserName} with commits:\n"; 
+        var message = $"<b>Push</b> from {UserName} with commits:\n";
 
+        var i = 1;
         return Commits.Aggregate(message, (current, commit) => 
-          current + $"<a href=\"{commit.Url}\">{commit.Title}</a>\n");
+          current + $"{i++}) <a href=\"{commit.Url}\">{commit.Title}</a>\n");
     }
 }
 /*
