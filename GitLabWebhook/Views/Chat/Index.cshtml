@@ -1,0 +1,59 @@
+@model IEnumerable<GitLabWebhook.Data.Models.Chat>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<h1>Chat List</h1>
+
+<p style="text-align:right;margin-right:20px;">
+    <a class="btn btn-outline-primary" asp-action="Create">Create New</a>
+</p>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ChatId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>Edit Action</th>
+                <th>Details Action</th>
+                <th>Delete Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChatId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="text-center">
+                    <a asp-action="Edit" class="btn btn-outline-primary"  asp-route-id ="@item.Id">Edit</a>
+                </td>
+                <td class="text-center">
+                    <a asp-action="Show" class="btn btn-outline-info"  asp-route-id="@item.Id">Details</a>
+                </td>
+                <td class="text-center">
+                    <a asp-action="Destroy" class="btn btn-outline-danger" asp-route-id ="@item.Id">Delete</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    </div>
