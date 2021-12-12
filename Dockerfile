@@ -9,8 +9,6 @@ COPY ["GitLabWebhook/GitLabWebhook.csproj", "GitLabWebhook/"]
 RUN dotnet restore "GitLabWebhook/GitLabWebhook.csproj"
 COPY . .
 WORKDIR "/src/GitLabWebhook"
-
-RUN dotnet tool install --global dotnet-ef
 RUN dotnet build "GitLabWebhook.csproj" -c Release -o /app/build
 
 FROM build AS publish
