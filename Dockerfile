@@ -12,6 +12,7 @@ WORKDIR "/src/GitLabWebhook"
 RUN dotnet build "GitLabWebhook.csproj" -c Release -o /app/build
 
 FROM build AS publish
+RUN dotnet tool install --global dotnet-ef && dotnet ef database update
 RUN dotnet publish "GitLabWebhook.csproj" -c Release -o /app/publish
 
 FROM base AS final
