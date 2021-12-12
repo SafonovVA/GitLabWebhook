@@ -10,7 +10,7 @@ RUN dotnet restore "GitLabWebhook/GitLabWebhook.csproj"
 COPY . .
 WORKDIR "/src/GitLabWebhook"
 
-RUN dotnet tool install --global dotnet-ef && dotnet-ef database update
+RUN dotnet tool install --global dotnet-ef && dotnet ef database update
 RUN dotnet build "GitLabWebhook.csproj" -c Release -o /app/build
 
 FROM build AS publish
