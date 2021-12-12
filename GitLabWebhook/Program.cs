@@ -1,5 +1,6 @@
 using GitLabWebhook;
 using GitLabWebhook.Data;
+using GitLabWebhook.Extensions;
 using GitLabWebhook.Middleware;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -12,15 +13,15 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews().AddNewtonsoftJson();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlite(builder.Configuration.GetConnectionStringFromEnvironment("DATABASE_URL")));
 
 builder.Services.AddSingleton(bot => new TelegramBot(
-    builder.Configuration.GetConnectionString("TelegramBotToken"),
+    builder.Configuration.GetConnectionStringFromEnvironment("TELEGRAM_BOT_TOKEN"),
     bot.GetRequiredService<ILogger<TelegramBot>>()));
 
 builder.WebHost.UseSentry(o =>
 {
-    o.Dsn = builder.Configuration.GetConnectionString("SentryDsn");
+    o.Dsn = builder.Configuration.GetConnectionStringFromEnvironment("SENTRY_DSN");
     o.Debug = true;
     o.TracesSampleRate = 1.0;
 });
@@ -32,7 +33,7 @@ var app = builder.Build();
 
 app.MapWhen(
     context => context.Request.Path.StartsWithSegments("/api/gitlab/"), 
-    appBuilder => appBuilder.UseMiddleware<CheckTokenMiddleware>(builder.Configuration.GetConnectionString("GitlabToken")));
+    appBuilder => appBuilder.UseMiddleware<CheckTokenMiddleware>(builder.Configuration.GetConnectionStringFromEnvironment("GITLAB_TOKEN")));
 
 if (app.Environment.IsDevelopment())
 {
