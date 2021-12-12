@@ -13,7 +13,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews().AddNewtonsoftJson();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionStringFromEnvironment("DATABASE_URL")));
+    options.UseNpgsql(builder.Configuration.GetConnectionStringFromEnvironment("DATABASE_URL")));
 
 builder.Services.AddSingleton(bot => new TelegramBot(
     builder.Configuration.GetConnectionStringFromEnvironment("TELEGRAM_BOT_TOKEN"),
