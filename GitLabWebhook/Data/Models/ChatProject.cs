@@ -1,8 +1,12 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace GitLabWebhook.Data.Models;
 
 public class ChatProject
 {
-    public Chat Chat { get; set; }
-    
-    public Project Project { get; set; }
+    [DisallowNull]
+    public Chat? Chat { get; set; }
+
+    [DisallowNull]
+    public Project? Project { get; set; }
 }

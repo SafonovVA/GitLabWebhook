@@ -15,7 +15,7 @@ public class ChatController : Controller
     }
     public async Task<ActionResult> Index()
     {
-        var chats = await _context.Chats.ToListAsync();
+        var chats = await _context.Chats!.ToListAsync();
         
         return View(chats);
     }
@@ -27,7 +27,7 @@ public class ChatController : Controller
     
     public ActionResult Show(int chatId)
     {
-        var chat = _context.Chats.Find(chatId);
+        var chat = _context.Chats!.Find(chatId);
 
         if (chat == null)
         {
@@ -38,7 +38,7 @@ public class ChatController : Controller
     
     public ActionResult Edit(int id)
     {
-        var chat = _context.Chats.Find(id);
+        var chat = _context.Chats!.Find(id);
 
         if (chat == null)
         {
@@ -49,7 +49,7 @@ public class ChatController : Controller
     
     public ActionResult Destroy(int id)
     {
-        var chat = _context.Chats.Find(id);
+        var chat = _context.Chats!.Find(id);
 
         if (chat == null)
         {
@@ -71,7 +71,7 @@ public class ChatController : Controller
         _context.Add(new Chat
         {
             ChatId = chatData.ChatId,
-            Name = chatData.Name
+            Name = chatData.Name!
         });
         
         await _context.SaveChangesAsync();
@@ -86,7 +86,7 @@ public class ChatController : Controller
             return RedirectToAction(nameof(Edit), chatData);
         }
 
-        var chat = await _context.Chats.FindAsync(id);
+        var chat = await _context.Chats!.FindAsync(id);
 
         if (chat == null)
         {
@@ -94,7 +94,7 @@ public class ChatController : Controller
         }
         
         chat.ChatId = chatData.ChatId;
-        chat.Name = chatData.Name;
+        chat.Name = chatData.Name!;
 
         _context.Update(chat);
         await _context.SaveChangesAsync();
@@ -104,6 +104,6 @@ public class ChatController : Controller
     
     public JsonResult IsChatIdExists(int chatId, int? id)
     {
-        return Json(!_context.Chats.Any(x => x.ChatId == chatId && x.Id != id));
+        return Json(!_context.Chats!.Any(x => x.ChatId == chatId && x.Id != id));
     }
 }

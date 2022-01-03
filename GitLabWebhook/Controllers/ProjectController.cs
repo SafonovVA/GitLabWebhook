@@ -15,7 +15,7 @@ public class ProjectController : Controller
     }
     public async Task<ActionResult> Index()
     {
-        var projects = await _context.Projects.ToListAsync();
+        var projects = await _context.Projects!.ToListAsync();
         
         return View(projects);
     }
@@ -27,7 +27,7 @@ public class ProjectController : Controller
     
     public ActionResult Show(int projectId)
     {
-        var project = _context.Projects.Find(projectId);
+        var project = _context.Projects!.Find(projectId);
 
         if (project == null)
         {
@@ -38,7 +38,7 @@ public class ProjectController : Controller
     
     public ActionResult Edit(int id)
     {
-        var project = _context.Projects.Find(id);
+        var project = _context.Projects!.Find(id);
 
         if (project == null)
         {
@@ -49,14 +49,14 @@ public class ProjectController : Controller
     
     public ActionResult Destroy(int id)
     {
-        var chat = _context.Chats.Find(id);
+        var project = _context.Projects!.Find(id);
 
-        if (chat == null)
+        if (project == null)
         {
             return NotFound();
         }
 
-        _context.Chats.Remove(chat);
+        _context.Projects.Remove(project);
         _context.SaveChanges();
         return RedirectToAction(nameof(Index));
     }
@@ -71,7 +71,7 @@ public class ProjectController : Controller
         _context.Add(new Project
         {
             ProjectId = projectData.ProjectId,
-            Name = projectData.Name
+            Name = projectData.Name!
         });
         
         await _context.SaveChangesAsync();
@@ -86,7 +86,7 @@ public class ProjectController : Controller
             return RedirectToAction(nameof(Edit), projectData);
         }
 
-        var project = await _context.Projects.FindAsync(id);
+        var project = await _context.Projects!.FindAsync(id);
 
         if (project == null)
         {
@@ -94,7 +94,7 @@ public class ProjectController : Controller
         }
         
         project.ProjectId = projectData.ProjectId;
-        project.Name = projectData.Name;
+        project.Name = projectData.Name!;
 
         _context.Update(project);
         await _context.SaveChangesAsync();
@@ -104,6 +104,6 @@ public class ProjectController : Controller
     
     public JsonResult IsProjectIdExists(int projectId, int? id)
     {
-        return Json(!_context.Projects.Any(x => x.ProjectId == projectId && x.Id != id));
+        return Json(!_context.Projects!.Any(x => x.ProjectId == projectId && x.Id != id));
     }
 }
