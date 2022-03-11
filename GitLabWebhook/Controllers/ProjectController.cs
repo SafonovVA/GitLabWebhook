@@ -25,9 +25,9 @@ public class ProjectController : Controller
         return View();
     }
     
-    public ActionResult Show(int projectId)
+    public ActionResult Show(int id)
     {
-        var project = _context.Projects!.Find(projectId);
+        var project = _context.Projects!.Find(id);
 
         if (project == null)
         {
