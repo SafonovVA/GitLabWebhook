@@ -7,5 +7,6 @@ public class ProjectTest
     [Test]
     public void TestProjectModelIsValid()
     {
+        Assert.True(true);
     }
 }

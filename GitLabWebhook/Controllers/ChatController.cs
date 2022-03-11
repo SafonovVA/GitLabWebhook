@@ -25,9 +25,9 @@ public class ChatController : Controller
         return View();
     }
     
-    public ActionResult Show(int chatId)
+    public ActionResult Show(int id)
     {
-        var chat = _context.Chats!.Find(chatId);
+        var chat = _context.Chats!.Find(id);
 
         if (chat == null)
         {
