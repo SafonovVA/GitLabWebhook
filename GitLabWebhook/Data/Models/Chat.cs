@@ -17,4 +17,6 @@ public class Chat
     [DisallowNull]
     [MaxLength(50)]
     public string? Name { get; set; }
+    
+    public ICollection<Project>? Projects { get; set; } 
 }

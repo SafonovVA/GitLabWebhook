@@ -1,23 +1,20 @@
 using GitLabWebhook.Data;
 using GitLabWebhook.Data.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace GitLabWebhook.Controllers;
 
 public class ChatController : Controller
 {
-    private readonly ApplicationDbContext _context;
+    private readonly ChatRepository _chatRepository;
 
     public ChatController(ApplicationDbContext context)
     {
-        _context = context;
+        _chatRepository = new ChatRepository(context);
     }
     public async Task<ActionResult> Index()
     {
-        var chats = await _context.Chats!.ToListAsync();
-        
-        return View(chats);
+        return View(await _chatRepository.ToListAsync());
     }
     
     public ActionResult Create()
@@ -25,40 +22,40 @@ public class ChatController : Controller
         return View();
     }
     
-    public ActionResult Show(int id)
+    public async Task<ActionResult> Show(int id)
     {
-        var chat = _context.Chats!.Find(id);
-
-        if (chat == null)
+        try
+        {
+            return View(await _chatRepository.FindByIdAsync(id));
+        }
+        catch (NullReferenceException)
+        {
+            return NotFound();
+        }    }
+    
+    public async Task<ActionResult> Edit(int id)
+    {
+        try
+        {
+            return View(await _chatRepository.FindByIdAsync(id));
+        }
+        catch (NullReferenceException)
         {
             return NotFound();
         }
-        return View(chat);
     }
     
-    public ActionResult Edit(int id)
+    public async Task<ActionResult> Destroy(int id)
     {
-        var chat = _context.Chats!.Find(id);
-
-        if (chat == null)
+        try
+        {
+            await _chatRepository.DestroyAsync(id);
+            return RedirectToAction(nameof(Index));        
+        }
+        catch (NullReferenceException)
         {
             return NotFound();
         }
-        return View(chat);
-    }
-    
-    public ActionResult Destroy(int id)
-    {
-        var chat = _context.Chats!.Find(id);
-
-        if (chat == null)
-        {
-            return NotFound();
-        }
-
-        _context.Chats.Remove(chat);
-        _context.SaveChanges();
-        return RedirectToAction(nameof(Index));
     }
     
     public async Task<IActionResult> Store([Bind("ChatId,Name")] Chat chatData)
@@ -68,13 +65,7 @@ public class ChatController : Controller
             return RedirectToAction(nameof(Create), chatData);
         }
         
-        _context.Add(new Chat
-        {
-            ChatId = chatData.ChatId,
-            Name = chatData.Name!
-        });
-        
-        await _context.SaveChangesAsync();
+        await _chatRepository.CreateAsync(chatData);
         
         return RedirectToAction(nameof(Index));
     }
@@ -86,24 +77,20 @@ public class ChatController : Controller
             return RedirectToAction(nameof(Edit), chatData);
         }
 
-        var chat = await _context.Chats!.FindAsync(id);
-
-        if (chat == null)
+        try
+        {
+            await _chatRepository.UpdateAsync(id, chatData);
+        }
+        catch (NullReferenceException)
         {
             return NotFound();
         }
-        
-        chat.ChatId = chatData.ChatId;
-        chat.Name = chatData.Name!;
-
-        _context.Update(chat);
-        await _context.SaveChangesAsync();
         
         return RedirectToAction(nameof(Index));
     }
     
     public JsonResult IsChatIdExists(int chatId, int? id)
     {
-        return Json(!_context.Chats!.Any(x => x.ChatId == chatId && x.Id != id));
+        return Json(!_chatRepository.IsChatIdExists(chatId, id));
     }
 }

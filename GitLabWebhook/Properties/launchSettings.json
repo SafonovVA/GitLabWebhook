@@ -16,7 +16,12 @@
       "launchUrl": "",
       "applicationUrl": "https://localhost:7246;http://localhost:5124",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DATABASE_CREDENTIALS": "Host=127.0.0.1;Port=5432;Database=gitlab_db;Username=gitlab_admin;Password=1",
+        "GITLAB_TOKEN": "123",
+        "SENTRY_DSN": "https://c430eeee21b14495bd0d2bd36f2a5c19@o1071978.ingest.sentry.io/6098021",
+        "TELEGRAM_BOT_TOKEN": "1703508845:AAEKFEPTkrunsVyU2obFKcEcNPphSVvc59U"
+
       }
     },
     "IIS Express": {
