@@ -12,14 +12,13 @@ public class GitLabWebhookJsonConverter : JsonCreationConverter<EventRequest>
 
         return jObject["object_kind"]?.Value<string>() switch
         {
-            // Push event
             "push" => new Push(),
-            
-            // Tag event
             "tag_push" => new Tag(),
-
-            // Comment event
             "note" => new Note(),
+            "issue" => new Issue(),
+            "merge_request" => new Requests.MergeRequest(),
+            "pipeline" => new Pipeline(),
+            "build" => new Job(),
 
             // Null event
             _ => new EventRequest()

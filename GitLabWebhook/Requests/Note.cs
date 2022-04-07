@@ -18,7 +18,8 @@ public class Note : EventRequest
 
     [Required] public Repository? Repository { get; set; }
 
-    [JsonProperty("object_attributes")] public ObjectAttributes? ObjectAttributes { get; set; }
+    [JsonProperty("object_attributes")]
+    public ObjectAttributes? ObjectAttributes { get; set; }
 
     [Required] public Commit? Commit { get; set; }
 

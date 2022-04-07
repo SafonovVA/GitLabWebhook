@@ -45,18 +45,14 @@ public class Project
     [JsonProperty("default_branch")]
     public string? DefaultBranch { get; set; }
 
-    [Required] 
     [Url] 
     public string? Homepage { get; set; }
 
-    [Required] 
     public string? Url { get; set; }
 
-    [Required] 
     [JsonProperty("ssh_url")] 
     public string? SshUrl { get; set; }
 
-    [Required]
     [Url]
     [JsonProperty("http_url")]
     public string? HttpUrl { get; set; }
