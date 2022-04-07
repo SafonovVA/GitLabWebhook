@@ -19,6 +19,7 @@ public class GitLabWebhookJsonConverter : JsonCreationConverter<EventRequest>
             "merge_request" => new Requests.MergeRequest(),
             "pipeline" => new Pipeline(),
             "build" => new Job(),
+            "deployment" => new Deployment(),
 
             // Null event
             _ => new EventRequest()
