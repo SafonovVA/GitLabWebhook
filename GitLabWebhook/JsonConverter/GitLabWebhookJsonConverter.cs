@@ -14,6 +14,9 @@ public class GitLabWebhookJsonConverter : JsonCreationConverter<EventRequest>
         {
             // Push event
             "push" => new Push(),
+            
+            // Tag event
+            "tag_push" => new Tag(),
 
             // Comment event
             "note" => new Note(),
