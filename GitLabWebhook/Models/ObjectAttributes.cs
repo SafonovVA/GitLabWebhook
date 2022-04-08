@@ -13,6 +13,12 @@ public class ObjectAttributes
     [JsonProperty("noteable_type")]
     public string? NoteAbletype { get; set; }
 
+    [JsonProperty("source_branch")]
+    public string? SourceBranch { get; set; }
+
+    [JsonProperty("target_branch")]
+    public string? TargetBranch { get; set; }
+
     [Required]
     [JsonProperty("author_id")]
     public int AuthorId { get; set; }
@@ -24,10 +30,10 @@ public class ObjectAttributes
 
     [Required]
     [JsonProperty("created_at")]
-    public string? CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
 
     [JsonProperty("updated_at")]
-    public string? UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 
     [Required]
     [JsonProperty("project_id")]

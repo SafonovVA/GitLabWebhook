@@ -24,8 +24,11 @@ public class GitLabWebhookController : ControllerBase
     public async Task<IActionResult> Handle([FromBody] EventRequest eventRequest)
     {
         _logger.LogInformation("Request is come");
-        // TODO: make chat ID dynamically, need web page to manage chat -> project
-        await _bot.Send(-703603408, eventRequest.ToString());
+        var message = eventRequest.ToString();
+        if (message != string.Empty)
+        {
+            await _bot.Send(-703603408, eventRequest.ToString());
+        }
         return Ok(eventRequest);
     }
 }

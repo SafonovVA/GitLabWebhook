@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using GitLabWebhook.Models;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using Newtonsoft.Json;
 
 namespace GitLabWebhook.Requests;
@@ -25,7 +26,9 @@ public class MergeRequest : EventRequest
 
     public override string ToString()
     {
-        var message = $"<b>Merge request</b> from <u>{User.Name}</u>\n";
+        var message = $"🔀 {ObjectAttributes.Action} <b>Merge request</b> by <u>{User.Name}</u>\n" +
+                      $"Source branch: <b>{ObjectAttributes.SourceBranch}</b>\n" +
+                      $"Target branch: <b>{ObjectAttributes.TargetBranch}</b>\n";
 
         return message;
     }
