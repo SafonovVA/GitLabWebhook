@@ -20,8 +20,6 @@ public class GitLabWebhookJsonConverter : JsonCreationConverter<EventRequest>
             "pipeline" => new Pipeline(),
             "build" => new Job(),
             "deployment" => new Deployment(),
-
-            // Null event
             _ => new EventRequest()
         };
     }
